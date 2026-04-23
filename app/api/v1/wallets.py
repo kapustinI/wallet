@@ -1,0 +1,14 @@
+from fastapi import APIRouter
+
+from app.service import wallets as wallet_service
+from app.schemas import CreateWalletRequest
+
+router = APIRouter()
+
+@router.get("/balance")
+def get_balance(wallet_name: str | None = None):
+    return wallet_service.get_wallet(wallet_name)
+
+@router.post("/wallets")
+def create_wallet(wallet: CreateWalletRequest):
+    return wallet_service.create_wallet(wallet)
