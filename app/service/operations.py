@@ -4,7 +4,7 @@ from app.schemas import OperationRequest
 
 
 def add_income(operation: OperationRequest):
-    if wallets_repository.is_wallet_exist(operation.wallet_name):
+    if not wallets_repository.is_wallet_exist(operation.wallet_name):
         raise HTTPException(
             status_code = 404,
             detail = f"Wallet {operation.wallet_name} not found"
@@ -19,10 +19,10 @@ def add_income(operation: OperationRequest):
         "new_balance": new_balance
     } 
 def add_expense(operation: OperationRequest):
-    if wallets_repository.is_wallet_exist(operation.wallet_name):
+    if not wallets_repository.is_wallet_exist(operation.wallet_name):
         raise HTTPException(
             status_code = 404,
-            detail = "Wallet {operation.wallet_name} not found"
+            detail = f"Wallet {operation.wallet_name} not found"
         )
     if operation.amount <= 0:
         raise HTTPException(
