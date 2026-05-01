@@ -20,7 +20,7 @@ def get_wallet(wallet_name: str | None = None):
     return {"wallet": wallet_name, 'balance': balance}
 
 def create_wallet(wallet: CreateWalletRequest):
-    if wallets_repository.is_wallet_exist(wallet):
+    if wallets_repository.is_wallet_exist(wallet.name):
         raise HTTPException(
             status_code=400,
             detail = f"Wallet {wallet.name} already exist"

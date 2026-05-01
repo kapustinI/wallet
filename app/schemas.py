@@ -22,7 +22,7 @@ class OperationRequest(BaseModel):
         
 
 class CreateWalletRequest(BaseModel):
-    name: str = Field(..., max_lenght=127)
+    name: str = Field(..., max_length=127)
     initial_balance: float = 0
 
     @field_validator('name')

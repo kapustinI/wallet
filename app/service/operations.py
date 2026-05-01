@@ -7,10 +7,10 @@ def add_income(operation: OperationRequest):
     if wallets_repository.is_wallet_exist(operation.wallet_name):
         raise HTTPException(
             status_code = 404,
-            detail = "Wallet {operation.wallet_name} not found"
+            detail = f"Wallet {operation.wallet_name} not found"
         )
     
-    new_balance = wallets_repository.add_income(operation.name, operation.amount)
+    new_balance = wallets_repository.add_income(operation.wallet_name, operation.amount)
     return {
         "message": "Income added",
         "wallet": operation.wallet_name,
@@ -35,7 +35,7 @@ def add_expense(operation: OperationRequest):
             status_code = 400,
             detail = f"Insufficient founds. Avialable: {balance}"
         )
-    new_balance = wallets_repository.add_expense(operation.name, operation.amount)
+    new_balance = wallets_repository.add_expense(operation.wallet_name, operation.amount)
     return {
         "message": "Expense added",
         "wallet": operation.wallet_name,
